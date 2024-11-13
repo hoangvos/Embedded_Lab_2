@@ -102,12 +102,10 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  displayTime();
-	  if(colon_flag){
-		  updateColon();
-	  }
-	  if(update_time_flag){
-		  updateTime();
+	  displayDigits();
+	  if(timer2_flag){
+		  shiftDigitsRight();
+		  setTimer2(COUNTER_SHIFT_DELAY);
 	  }
     /* USER CODE END WHILE */
 

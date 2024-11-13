@@ -14,18 +14,15 @@
 #include "software_timer.h"
 
 #define TIMER_CYCLE_2 1
-#define COUTNER_COLON_BLINK 250
-#define COUNTER_TIME_UPDATE 60000
+#define COUNTER_SHIFT_DELAY 1000
 
-extern int colon_flag;
-extern int update_time_flag;
+extern int timer2_flag;
+extern int counter_shift;
 
 
 void timer_init();
-void setTimer_colon(uint16_t duration);
-void setTimer_update_time(uint16_t duration);
-void displayTime();
-void updateColon();
-void updateTime();
+void setTimer2(uint16_t duration);
+void shiftDigitsRight();
+void displayDigits();
 
 #endif /* INC_SOFTWARE_TIMER_H_ */
