@@ -12,8 +12,16 @@
 
 #define TIMER_CYCLE_2 1
 
+#define COUNTER_SCAN_1HZ 500
+#define COUNTER_SCAN_25HZ 20
+#define COUNTER_SCAN_100HZ 5
+
+int counter_scan = COUNTER_SCAN_25HZ;
+
+
 int timer2_flag = 0;
 int counter2 = 0;
+
 /**
   * @brief  Init timer interrupt
   * @param  None
@@ -43,7 +51,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 				timer2_flag = 1;
 			}
 		}
-		// 1ms interrupt here
-		//led7_Scan();
+		if(counter_scan > 0 ){
+			counter_scan--;
+			if(counter_scan <= 0){
+				led7_Scan();
+				counter_scan = COUNTER_SCAN_25HZ;
+			}
+		}
+
 	}
 }

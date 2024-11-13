@@ -53,7 +53,6 @@ TIM_HandleTypeDef htim2;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-
 /* USER CODE BEGIN PFP */
 void system_init();
 void test_LedDebug();
@@ -190,14 +189,13 @@ void SystemClock_Config(void)
   }
 }
 
-
-
 /* USER CODE BEGIN 4 */
 void system_init(){
 	  HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, 0);
 	  HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 0);
 	  HAL_GPIO_WritePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin, 0);
 	  timer_init();
+	  led7_init();
 	  setTimer2(5000);
 }
 /* USER CODE END 4 */

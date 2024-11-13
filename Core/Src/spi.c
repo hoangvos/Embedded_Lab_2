@@ -50,6 +50,7 @@ void MX_SPI1_Init(void)
 }
 
 
+
 /**
 * @brief SPI MSP Initialization
 * This function configures the hardware resources used in this example
