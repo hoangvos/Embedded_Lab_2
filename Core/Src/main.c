@@ -56,20 +56,11 @@ void SystemClock_Config(void);
 
 /* USER CODE BEGIN PFP */
 void system_init();
-void test_LedDebug();
-void test_LedY0();
-void test_LedY1();
-void test_7seg();
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
-enum traffic_led_state{
-	LED_RED,
-	LED_GREEN,
-	LED_YELLOW
-};
 
 /* USER CODE END 0 */
 
@@ -105,39 +96,18 @@ int main(void)
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
   system_init();
-  enum traffic_led_state current_state = LED_RED;
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_GPIO_WritePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin, 0);
-	  HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, 0);
-	  HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 0);
-	  switch(current_state){
-	  case LED_RED:
-		  HAL_GPIO_WritePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin, 1);
-		  if(timer2_flag){
-			  setTimer2(3000);
-			  current_state = LED_GREEN;
-		  }
-		  break;
-	  case LED_GREEN:
-		  HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y1_Pin, 1);
-		  if(timer2_flag){
-			  setTimer2(1000);
-			  current_state = LED_YELLOW;
-		  }
-		  break;
-	  case LED_YELLOW:
-		  HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 1);
-		  if(timer2_flag){
-			  setTimer2(5000);
-			  current_state = LED_RED;
-		  }
-		  break;
+	  displayTime();
+	  if(colon_flag){
+		  updateColon();
+	  }
+	  if(update_time_flag){
+		  updateTime();
 	  }
     /* USER CODE END WHILE */
 
@@ -198,7 +168,6 @@ void system_init(){
 	  HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 0);
 	  HAL_GPIO_WritePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin, 0);
 	  timer_init();
-	  setTimer2(5000);
 }
 /* USER CODE END 4 */
 
